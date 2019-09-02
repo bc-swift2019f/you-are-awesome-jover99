@@ -41,20 +41,18 @@ class ViewController: UIViewController {
             index = index + 1
         }
       
-        
-        /*
-        let message1 = "You Are Awesome!"
-        let message2 = "You Are Great!"
-        let message3 = "You Are Amazing!"
-        
-        if messageLabel.text == message1 {
-            messageLabel.text = message2
-        } else if messageLabel.text == message2 {
-            messageLabel.text = message3 //This is case sensitive!
-        } else {
-            messageLabel.text = message1
-    }
- */
+//
+//        let message1 = "You Are Awesome!"
+//        let message2 = "You Are Great!"
+//        let message3 = "You Are Amazing!"
+//        if messageLabel.text == message1 {
+//            messageLabel.text = message2
+//        } else if messageLabel.text == message2 {
+//            messageLabel.text = message3 //This is case sensitive!
+//        } else {
+//            messageLabel.text = message1
+//    }
+ 
         
 }
 }
