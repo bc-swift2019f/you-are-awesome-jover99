@@ -34,7 +34,16 @@ class ViewController: UIViewController {
                         "You've got the design skills of Jony Ive",
                         "I can't wait to download your app!"]//Why does prof's let him do it on multiple lines?
         
-        messageLabel.text = messages.randomElement()!
+        var newIndex = -1
+        
+        repeat {
+            newIndex = Int.random(in: 0..<messages.count)
+        } while index == newIndex
+        
+        index = newIndex
+        messageLabel.text = messages[index]
+        
+        //messageLabel.text = messages.randomElement()!
         
 //        messageLabel.text = messages[index]
 //        if index == messages.count - 1 {
