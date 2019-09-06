@@ -34,7 +34,8 @@ class ViewController: UIViewController {
                         "You've got the design skills of Jony Ive",
                         "I can't wait to download your app!"]//Why does prof's let him do it on multiple lines?
         
-        var newIndex = -1
+        //var newIndex = -1
+        var newIndex: Int //Declares but doesn't initialize newIndex
         
         repeat {
             newIndex = Int.random(in: 0..<messages.count)
