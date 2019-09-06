@@ -9,9 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var awesomeImageView: UIImageView!
+    
     @IBOutlet weak var messageLabel: UILabel!
-    var index = 0
+    var index = -1
+    var imageIndex = -1
+    let numberOfImages = 10
     
     //Code below executes when the app's view first loads
     override func viewDidLoad() {
@@ -34,7 +38,7 @@ class ViewController: UIViewController {
                         "You've got the design skills of Jony Ive",
                         "I can't wait to download your app!"]//Why does prof's let him do it on multiple lines?
         
-        //var newIndex = -1
+        
         var newIndex: Int //Declares but doesn't initialize newIndex
         
         repeat {
@@ -44,26 +48,12 @@ class ViewController: UIViewController {
         index = newIndex
         messageLabel.text = messages[index]
         
-        //messageLabel.text = messages.randomElement()!
+        repeat {
+            newIndex = Int.random(in: 0..<numberOfImages)
+        } while imageIndex == newIndex
         
-//        messageLabel.text = messages[index]
-//        if index == messages.count - 1 {
-//            index = 0 //Why can't you have messageLabel.text = messages[0]?
-//        } else {
-//            index = index + 1
-//        }
-      
-//        let message1 = "You Are Awesome!"
-//        let message2 = "You Are Great!"
-//        let message3 = "You Are Amazing!"
-//        if messageLabel.text == message1 {
-//            messageLabel.text = message2
-//        } else if messageLabel.text == message2 {
-//            messageLabel.text = message3 //This is case sensitive!
-//        } else {
-//            messageLabel.text = message1
-//    }
- 
+        imageIndex = newIndex
+        awesomeImageView.image = UIImage(named: "image\(imageIndex)") //Put in any image that you actually have in assets.
         
 }
 }
