@@ -25,8 +25,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //How do I make circle go away?
-        
     }
+    
+    func nonRepeatingRandom(lastNumber: Int, maxValue: Int) -> Int {
+        var newIndex: Int
+        repeat {
+            newIndex = Int.random(in: 0..<maxValue)
+        } while lastNumber == newIndex
+        return newIndex
+    }
+    
+    func playSound(soundName: String) {
+        //Can we load in the file soundName?
+        if let sound = NSDataAsset(name: soundName) {
+            //Check if data sound.data is a sound file
+            do {
+                try awesomePlayer = AVAudioPlayer(data: sound.data)
+                awesomePlayer.play()
+            } catch {
+                //if sound.data is not a valid audio file
+                print("ERROR: data in \(soundName) couldn't be played as a sound.")
+            }
+        } else {
+            //If reading in the NSDataAsset didn't work, tell the developer to report the error.
+            print("ERROR: file \(soundName) didn't load")
+        }
+    }
+
 //Does the fact that color is red in utility pane do anything to the label? Or what residual effect does it have?
     @IBAction func showMessagePressed(_ sender: UIButton) {
         
@@ -41,52 +66,22 @@ class ViewController: UIViewController {
                         "You are tremendous!",
                         "You've got the design skills of Jony Ive",
                         "I can't wait to download your app!"]//Why does prof's let him do it on multiple lines?
-        
-        
-        var newIndex: Int //Declares but doesn't initialize newIndex
+
         
         //Show a message
-        repeat {
-            newIndex = Int.random(in: 0..<messages.count)
-        } while index == newIndex
-        
-        index = newIndex
+        index = nonRepeatingRandom(lastNumber: index, maxValue: messages.count)
         messageLabel.text = messages[index]
         
         //Show an image
-        repeat {
-            newIndex = Int.random(in: 0..<numberOfImages)
-        } while imageIndex == newIndex
-        
-        imageIndex = newIndex
+        imageIndex = nonRepeatingRandom(lastNumber: imageIndex, maxValue: numberOfImages)
         awesomeImageView.image = UIImage(named: "image\(imageIndex)") //Put in any image that you actually have in assets.
         
        //Get a random number to use in our soundName file
-        repeat {
-            newIndex = Int.random(in: 0..<numberOfSounds)
-        } while soundIndex == newIndex
-        
-        soundIndex = newIndex
-        
+        soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
         
         //Play a sound
-        var soundName = "sound\(soundIndex)"
+        let soundName = "sound\(soundIndex)"
+        playSound(soundName: soundName )
         
-        //Can we load in the file soundName?
-        if let sound = NSDataAsset(name: soundName) {
-            //Check if data sound.data is a sound file
-            do {
-                try awesomePlayer = AVAudioPlayer(data: sound.data)
-                awesomePlayer.play()
-            } catch {
-                //if sound.data is not a valid audio file
-                print("ERROR: data in \(soundName) couldn't be played as a sound.")
-            }
-            
-        } else {
-            //If reading in the NSDataAsset didn't work, tell the developer to report the error.
-            print("ERROR: file \(soundName) didn't load")
-        }
-        
-}
+    }
 }
