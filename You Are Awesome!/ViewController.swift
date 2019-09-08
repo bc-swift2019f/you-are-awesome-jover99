@@ -4,7 +4,7 @@
 //
 //  Created by Richard Jove on 8/25/19.
 //  Copyright © 2019 Richard Jove. All rights reserved.
-//
+
 //Richard Jové
 import UIKit
 import AVFoundation //Need import statement here, or else it won't work... and neither will code completion!
@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var awesomeImageView: UIImageView!
     
     @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var soundSwitch: UISwitch!
+    
     var awesomePlayer = AVAudioPlayer()
     var index = -1
     var imageIndex = -1
@@ -52,6 +55,14 @@ class ViewController: UIViewController {
         }
     }
 
+    
+    @IBAction func soundSwitchPressed(_ sender: UISwitch) {
+        if soundSwitch.isOn == false && soundIndex != -1 {
+            awesomePlayer.stop()
+        }
+    }
+    
+    
 //Does the fact that color is red in utility pane do anything to the label? Or what residual effect does it have?
     @IBAction func showMessagePressed(_ sender: UIButton) {
         
@@ -75,13 +86,16 @@ class ViewController: UIViewController {
         //Show an image
         imageIndex = nonRepeatingRandom(lastNumber: imageIndex, maxValue: numberOfImages)
         awesomeImageView.image = UIImage(named: "image\(imageIndex)") //Put in any image that you actually have in assets.
-        
-       //Get a random number to use in our soundName file
-        soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
-        
-        //Play a sound
-        let soundName = "sound\(soundIndex)"
-        playSound(soundName: soundName, audioPlayer: &awesomePlayer)
-        
+     
+        //if soundSwitch.isOn == true {
+        if soundSwitch.isOn {
+            
+            //Get a random number to use in our soundName file
+            soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
+
+            //Play a sound
+            let soundName = "sound\(soundIndex)"
+            playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+        }
     }
 }
